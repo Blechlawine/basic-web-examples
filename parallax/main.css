@@ -1,0 +1,10 @@
+.center {
+    width: max-content;
+    margin: 50vh 0 40vh 50%;
+    translate: -50% -50%;
+}
+
+.content {
+    padding: 16px;
+    background-color: white;
+}
