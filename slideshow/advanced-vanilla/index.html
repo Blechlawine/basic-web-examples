@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="advanced.css" />
+        <link rel="stylesheet" href="../../global.css" />
+        <script defer src="slideshow.js"></script>
+        <title>Advanced Slideshow example</title>
+    </head>
+    <body>
+        <div id="background">
+            <img class="backgroundImage" src="image/placeholder1.jpg" />
+            <img class="backgroundImage" loading="lazy" src="image/placeholder2.jpg" />
+        </div>
+
+        <div id="cardContainer">
+            <div id="card">
+                <h1 id="cardTitle">Advanced Slideshow</h1>
+                <div class="cardDescription">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa nunc fermentum suspendisse neque.
+                        Et vestibulum, blandit turpis aenean.
+                    </p>
+                </div>
+                <div id="slideshowMenu">
+                    <div class="slideShowControl" id="slideshowLeftArrow">
+                        <img class="slideShowControlIcon" src="image/chevron-left.svg" alt="" />
+                    </div>
+                    <div id="slideshowScroll">
+                        <div class="slideShowCircle"></div>
+                        <div class="slideShowCircle"></div>
+                    </div>
+                    <div class="slideShowControl" id="slideshowRightArrow">
+                        <img class="slideShowControlIcon" src="image/chevron-right.svg" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
