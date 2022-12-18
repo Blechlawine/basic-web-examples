@@ -1,28 +1,29 @@
-let currentImageIndex = 0; // Index des aktiven Bildes beim Laden der Seite
-let offset = 100; // Offset in %, um die die Bilder in der Slideshow verschoben werden, wenn man durchklickt
-let circleOffsetPx = 18 + 8; // Abstand von der Mitte eines kleinen Kreises zur Mitte des nächsten kleinen Kreises
+let currentImageIndex = 0; // Index of the active image when the page loads
+let offset = 100; // Offset in %, the slideshow images are moved by this amount to get to the next image
+let circleOffsetPx = 18 + 8; // Distance between the center of a small circle to the center of the next small circle
 let initialCircleOffset = null;
 let maxImageIndex = null;
 
 window.addEventListener("load", () => {
     setTimeout(() => {
-        maxImageIndex = document.getElementsByClassName("backgroundImage").length - 1; // der Index des letzten Bildes in der Slideshow
-        let circleAmount = document.getElementsByClassName("slideShowCircle").length; // Anzahl Kreise in Slideshowcontrol
-        initialCircleOffset = (circleAmount / 2) * circleOffsetPx - (circleOffsetPx + 3) / 2; // Die Kreise sollten beim Laden der Seite nach rechts verschoben werden, damit der aktive Kreis(der beim laden der Seite immer der erste ist) mittig zwischen den 2 Pfeilen liegt. +3 deshalb, weil der aktive Kreis einen 3px größeren radius hat
+        maxImageIndex = document.getElementsByClassName("backgroundImage").length - 1; // index of the last image in the slideshow
+        let circleAmount = document.getElementsByClassName("slideShowCircle").length; // number of circles in the slideshow control box
+        initialCircleOffset = (circleAmount / 2) * circleOffsetPx - (circleOffsetPx + 3) / 2; // The circles need to be moved to the right when the page loads, so the active circle, which at the start is always the one on the far left, can be centered between the left and right buttons (+3 because the active circle has a radius of 3px more than a small circle)
         [...document.getElementsByClassName("slideShowCircle")].forEach((element) => {
-            element.style.transform = "translateX(" + initialCircleOffset + "px)"; // verschiebt die Kreise um das in der vorherigen Zeile berechnete offset, sodass der aktive Kreis mittig zwischen den 2 Pfeilen liegt
+            element.style.transform = "translateX(" + initialCircleOffset + "px)"; // Moves the circles by the previously calculated offset, so the active circle is centered between the arrow buttons
         });
-        document.getElementsByClassName("slideShowCircle")[currentImageIndex].classList.add("activeCircle"); // fügt die Klasse "activeCircle" zum aktiven Kreis hinzu, sodass dieser hervorgehoben wird
+        document.getElementsByClassName("slideShowCircle")[currentImageIndex].classList.add("activeCircle"); // adds the "activeCircle" class to the active circle
 
-        // Spread-syntax hier, sonst geth das .forEach nicht
         [...document.getElementsByClassName("slideShowCircle")].forEach((element, index) => {
             element.addEventListener("click", () => setActiveImage(index));
         });
-    }, 100);
+    }, 100); // TODO: why do we wait 100 ms here?
 });
 
 function setActiveImage(imageIndex) {
-    // verschiebt die Kreise um das passende Offset, sodass der aktive Kreis mittig zwischen den 2 Pfeilen liegt und gibt dem aktiven Kreis die Klasse "activeCircle" und verschiebt die Slideshowbilder
+    // 1. Moves the circles by the needed offset to get the active circle centered between the two arrow buttons
+    // 2. adds the "activeCircle" class to the active circle
+    // 3. moves the images in the slideshow for only the active image to be visible
 
     document.getElementsByClassName("slideShowCircle")[currentImageIndex].classList.remove("activeCircle");
     currentImageIndex = imageIndex;

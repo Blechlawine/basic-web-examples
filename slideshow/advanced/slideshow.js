@@ -1,26 +1,27 @@
-let currentImageIndex = 0; // Index des aktiven Bildes beim Laden der Seite
-let offset = 100; // Offset in %, um die die Bilder in der Slideshow verschoben werden, wenn man durchklickt
-let circleOffsetPx = 18 + 8; // Abstand von der Mitte eines kleinen Kreises zur Mitte des nächsten kleinen Kreises
+let currentImageIndex = 0; // Index of the active image when the page loads
+let offset = 100; // Offset in %, the slideshow images are moved by this amount to get to the next image
+let circleOffsetPx = 18 + 8; // Distance between the center of a small circle to the center of the next small circle
 let initialCircleOffset = null;
 let maxImageIndex = null;
 
 $(window).on("load", () => {
     setTimeout(() => {
-        maxImageIndex = $(".backgroundImage").length - 1; // der Index des letzten Bildes in der Slideshow
-        let circleAmount = $(".slideShowCircle").length; // Anzahl Kreise in Slideshowcontrol
-        initialCircleOffset = (circleAmount / 2) * circleOffsetPx - (circleOffsetPx + 3) / 2; // Die Kreise sollten beim Laden der Seite nach rechts verschoben werden, damit der aktive Kreis(der beim laden der Seite immer der erste ist) mittig zwischen den 2 Pfeilen liegt. +3 deshalb, weil der aktive Kreis einen 3px größeren radius hat
-        $(".slideShowCircle").css("transform", "translateX(" + initialCircleOffset + "px)"); // verschiebt die Kreise um das in der vorherigen Zeile berechnete offset, sodass der aktive Kreis mittig zwischen den 2 Pfeilen liegt
-        $(".slideShowCircle").eq(currentImageIndex).addClass("activeCircle"); // fügt die Klasse "activeCircle" zum aktiven Kreis hinzu, sodass dieser hervorgehoben wird
+        maxImageIndex = $(".backgroundImage").length - 1; // index of the last image in the slideshow
+        let circleAmount = $(".slideShowCircle").length; // number of circles in the slideshow control box
+        initialCircleOffset = (circleAmount / 2) * circleOffsetPx - (circleOffsetPx + 3) / 2; // The circles need to be moved to the right when the page loads, so the active circle, which at the start is always the one on the far left, can be centered between the left and right buttons (+3 because the active circle has a radius of 3px more than a small circle)
+        $(".slideShowCircle").css("transform", "translateX(" + initialCircleOffset + "px)"); // Moves the circles by the previously calculated offset, so the active circle is centered between the arrow buttons
+        $(".slideShowCircle").eq(currentImageIndex).addClass("activeCircle"); // adds the "activeCircle" class to the active circle
 
         $(".slideShowCircle").each(function (i) {
-            // arrowfunction funktioniert hier nicht, damit "this" auf den angeklickten Kreis zeigt
             $(this).click(() => setActiveImage(i));
         });
     }, 100);
 });
 
 function setActiveImage(imageIndex) {
-    // verschiebt die Kreise um das passende Offset, sodass der aktive Kreis mittig zwischen den 2 Pfeilen liegt und gibt dem aktiven Kreis die Klasse "activeCircle" und verschiebt die Slideshowbilder
+    // 1. Moves the circles by the needed offset to get the active circle centered between the two arrow buttons
+    // 2. adds the "activeCircle" class to the active circle
+    // 3. moves the images in the slideshow for only the active image to be visible
 
     $(".slideShowCircle").eq(currentImageIndex).removeClass("activeCircle");
     currentImageIndex = imageIndex;
